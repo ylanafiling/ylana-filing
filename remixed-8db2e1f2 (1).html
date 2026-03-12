@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ylana Filing Co. | Bankruptcy Petition Preparer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #fdf6ee;
+  --blush: #f9ede0;
+  --gold: #C9A96E;
+  --gold-light: #e8d5b0;
+  --gold-dark: #a07840;
+  --text-dark: #2c2118;
+  --text-mid: #6b5744;
+  --text-light: #a08878;
+  --white: #ffffff;
+  --section-alt: #fff8f2;
+  --dark-bg: #1e160e;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 60px;
+  background: rgba(253,246,238,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(201,169,110,0.2);
+}
+.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--text-dark); letter-spacing: 1px; }
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+.nav-links a { text-decoration: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-mid); font-weight: 500; transition: color 0.3s; }
+.nav-links a:hover { color: var(--gold); }
+.nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 10px 22px; border-radius: 30px; font-weight: 600 !important; }
+.nav-cta:hover { background: var(--gold-dark) !important; }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  background: linear-gradient(160deg, var(--cream) 0%, var(--blush) 60%, #f5e6d3 100%);
+  padding: 120px 60px 80px; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -100px; right: -100px;
+  width: 500px; height: 500px; border-radius: 50%;
+  border: 60px solid rgba(201,169,110,0.08);
+  animation: pulse 6s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.05);opacity:0.7} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+
+.hero-content { max-width: 640px; animation: fadeUp 1s ease 0.3s both; }
+.hero-tag { display: inline-block; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 20px; padding: 8px 18px; border: 1px solid var(--gold-light); border-radius: 30px; background: rgba(201,169,110,0.08); }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(42px, 6vw, 72px); line-height: 1.1; color: var(--text-dark); margin-bottom: 24px; font-weight: 700; }
+.hero h1 em { font-style: italic; color: var(--gold); }
+.hero-sub { font-size: 17px; line-height: 1.7; color: var(--text-mid); font-weight: 300; margin-bottom: 40px; max-width: 500px; }
+.hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+
+.btn-primary { background: var(--gold); color: var(--white); padding: 16px 36px; border-radius: 40px; text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.3s; box-shadow: 0 8px 30px rgba(201,169,110,0.35); display: inline-block; white-space: nowrap; }
+.btn-primary:hover { background: var(--gold-dark); transform: translateY(-2px); }
+.btn-secondary { border: 1.5px solid var(--gold); color: var(--gold-dark); padding: 16px 36px; border-radius: 40px; text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.3s; }
+.btn-secondary:hover { background: var(--gold); color: var(--white); transform: translateY(-2px); }
+
+.hero-badge { position: absolute; right: 80px; bottom: 80px; width: 140px; height: 140px; border-radius: 50%; background: var(--white); border: 2px solid var(--gold-light); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 16px; box-shadow: 0 10px 40px rgba(201,169,110,0.2); }
+.hero-badge .big { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: var(--gold); }
+.hero-badge .small { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-mid); margin-top: 4px; line-height: 1.4; }
+
+/* SECTIONS */
+section { padding: 100px 60px; }
+.section-tag { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 14px; }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 52px); font-weight: 700; color: var(--text-dark); line-height: 1.15; margin-bottom: 20px; }
+.section-title em { font-style: italic; color: var(--gold); }
+.section-sub { font-size: 16px; line-height: 1.8; color: var(--text-mid); font-weight: 300; max-width: 560px; }
+
+/* HOW IT WORKS */
+.how { background: var(--section-alt); }
+.how-inner { max-width: 1100px; margin: 0 auto; }
+.how-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; margin-top: 60px; }
+.how-card { background: var(--white); border-radius: 20px; padding: 36px 28px; border: 1px solid rgba(201,169,110,0.15); transition: transform 0.3s, box-shadow 0.3s; }
+.how-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(201,169,110,0.15); }
+.how-num { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 700; color: var(--gold-light); line-height: 1; margin-bottom: 16px; }
+.how-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--text-dark); margin-bottom: 10px; }
+.how-card p { font-size: 14px; line-height: 1.7; color: var(--text-mid); font-weight: 300; }
+
+/* WHY MYA */
+#why { background: var(--cream); }
+.why-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1100px; margin: 0 auto; }
+.why-visual { position: relative; height: 420px; }
+.why-card-big { position: absolute; top: 0; left: 0; width: 75%; background: linear-gradient(135deg, var(--blush), #f5e0cc); border-radius: 24px; padding: 40px; height: 300px; display: flex; flex-direction: column; justify-content: flex-end; border: 1px solid rgba(201,169,110,0.2); }
+.why-card-big .quote { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: var(--text-dark); line-height: 1.5; }
+.why-card-big .author { margin-top: 16px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+.why-card-small { position: absolute; top: -80px; right: -20px; width: 55%; background: var(--gold); border-radius: 20px; padding: 28px; color: var(--white); box-shadow: 0 15px 40px rgba(201,169,110,0.4); }
+.why-card-small .stat { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 700; line-height: 1; }
+.why-card-small .stat-label { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.85; margin-top: 8px; font-weight: 300; }
+.why-list { list-style: none; margin-top: 36px; display: flex; flex-direction: column; gap: 18px; }
+.why-list li { display: flex; align-items: flex-start; gap: 14px; font-size: 15px; line-height: 1.6; color: var(--text-mid); font-weight: 300; }
+.why-check { width: 24px; height: 24px; border-radius: 50%; background: rgba(201,169,110,0.15); border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; font-size: 11px; color: var(--gold); }
+
+/* SCHEDULE FORM */
+.schedule { background: linear-gradient(160deg, var(--blush) 0%, #f5e0cc 100%); }
+.schedule-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+.schedule-inner .section-sub { margin: 0 auto 50px; }
+.form-group { margin-bottom: 20px; text-align: left; }
+.form-group label { display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; margin-bottom: 8px; }
+.form-group input, .form-group textarea { width: 100%; padding: 16px 20px; border: 1.5px solid rgba(201,169,110,0.3); border-radius: 12px; background: var(--white); font-family: 'Jost', sans-serif; font-size: 15px; color: var(--text-dark); outline: none; transition: border-color 0.3s; }
+.form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
+.form-group textarea { height: 120px; resize: vertical; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.submit-btn { width: 100%; padding: 18px; background: var(--gold); color: var(--white); border: none; border-radius: 40px; font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.3s; margin-top: 10px; box-shadow: 0 8px 30px rgba(201,169,110,0.35); }
+.submit-btn:hover { background: var(--gold-dark); transform: translateY(-2px); }
+
+/* LEGAL REFERRAL */
+.legal-section { background: var(--section-alt); }
+.legal-inner { max-width: 1100px; margin: 0 auto; }
+.legal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; margin-top: 50px; }
+.legal-card { background: var(--white); border-radius: 20px; padding: 36px 30px; border: 1px solid rgba(201,169,110,0.15); text-align: center; transition: transform 0.3s, box-shadow 0.3s; }
+.legal-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(201,169,110,0.12); }
+.legal-icon { font-size: 36px; margin-bottom: 18px; }
+.legal-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--text-dark); margin-bottom: 12px; }
+.legal-card p { font-size: 14px; line-height: 1.7; color: var(--text-mid); font-weight: 300; }
+.lawyer-cta { background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.25); border-radius: 20px; padding: 36px 40px; text-align: center; margin-top: 40px; }
+.lawyer-cta-text { font-size: 16px; line-height: 1.7; color: var(--text-mid); font-weight: 300; margin-bottom: 24px; }
+.lawyer-cta .btn-primary { font-size: 11px; padding: 14px 28px; letter-spacing: 1.5px; }
+
+/* HM PARTNER SECTION */
+.hm-section { background: var(--cream); }
+.hm-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 340px 1fr; gap: 70px; align-items: center; }
+.hm-photo-wrap { position: relative; }
+.hm-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 24px; box-shadow: 0 20px 60px rgba(44,33,24,0.18); }
+.hm-photo-badge { position: absolute; bottom: -20px; right: -20px; background: var(--gold); color: var(--white); padding: 16px 22px; border-radius: 16px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; box-shadow: 0 10px 30px rgba(201,169,110,0.4); }
+.hm-content { padding-top: 10px; }
+.hm-name-block { margin-bottom: 10px; }
+.hm-name-block .section-title { margin-bottom: 6px; }
+.hm-name-block em { color: var(--gold); font-style: italic; }
+.hm-brokerage { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 24px; }
+.hm-bio { font-size: 15px; line-height: 1.8; color: var(--text-mid); font-weight: 300; margin-bottom: 32px; }
+.hm-contacts { display: flex; flex-direction: column; gap: 12px; }
+.hm-contact-btn { display: flex; align-items: center; gap: 12px; padding: 14px 22px; background: var(--white); border: 1.5px solid rgba(201,169,110,0.25); border-radius: 12px; text-decoration: none; font-size: 14px; color: var(--text-dark); font-weight: 400; transition: all 0.3s; }
+.hm-contact-btn:hover { border-color: var(--gold); background: rgba(201,169,110,0.06); }
+.hm-contact-btn svg { width: 18px; height: 18px; fill: var(--gold); flex-shrink: 0; }
+
+/* TESTIMONIALS */
+.testimonials { background: var(--section-alt); }
+.testi-inner { max-width: 1100px; margin: 0 auto; }
+.testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 50px; }
+.testi-card { background: var(--white); border-radius: 20px; padding: 32px 28px; border: 1px solid rgba(201,169,110,0.12); }
+.testi-card.featured { background: var(--dark-bg); border-color: rgba(201,169,110,0.3); }
+.testi-stars { color: #f4a623; font-size: 14px; letter-spacing: 2px; margin-bottom: 14px; }
+.testi-text { font-size: 14px; line-height: 1.8; color: var(--text-mid); font-weight: 300; margin-bottom: 20px; font-style: italic; }
+.testi-card.featured .testi-text { color: rgba(255,255,255,0.75); }
+.testi-author { font-size: 12px; font-weight: 600; color: var(--text-dark); letter-spacing: 1px; text-transform: uppercase; }
+.testi-card.featured .testi-author { color: var(--gold); }
+.testi-source { font-size: 11px; color: var(--text-light); margin-top: 4px; }
+.testi-card.featured .testi-source { color: rgba(255,255,255,0.4); }
+
+/* PARTNER BAR */
+.partner-bar { background: var(--dark-bg); padding: 50px 60px; text-align: center; }
+.partner-bar p { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+.partner-bar h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 4vw, 38px); color: var(--gold); font-weight: 600; line-height: 1.3; }
+
+/* FOOTER */
+footer { background: #150f08; padding: 50px 60px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 30px; }
+.footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; color: var(--white); }
+.footer-logo span { color: var(--gold); }
+.footer-contact { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 2; font-weight: 300; }
+.footer-contact a { color: var(--gold-light); text-decoration: none; display: block; }
+.footer-contact a:hover { color: var(--gold); }
+.footer-divider { width: 100%; height: 1px; background: rgba(255,255,255,0.06); margin: 10px 0; }
+.footer-partner-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 6px; }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.25); letter-spacing: 1px; align-self: flex-end; }
+
+/* DISCLAIMER */
+.disclaimer { background: var(--section-alt); padding: 30px 60px; text-align: center; }
+.disclaimer p { font-size: 11px; color: var(--text-light); line-height: 1.7; max-width: 800px; margin: 0 auto; }
+
+/* MOBILE */
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  section { padding: 70px 20px; }
+  .hero { padding: 100px 20px 60px; }
+  .hero-badge { display: none; }
+  .why-inner { grid-template-columns: 1fr; }
+  .why-visual { height: 280px; }
+  .form-row { grid-template-columns: 1fr; }
+  .hm-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hm-photo-wrap { max-width: 300px; margin: 0 auto; }
+  .partner-bar { padding: 40px 20px; }
+  footer { padding: 40px 20px; flex-direction: column; }
+  .disclaimer { padding: 24px 20px; }
+  .legal-section { padding: 70px 20px; }
+  .lawyer-cta { padding: 28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Ylana <span>Filing Co.</span></div>
+  <ul class="nav-links">
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#why">About</a></li>
+    <li><a href="#legal">Legal Help</a></li>
+    <li><a href="#partner">Our Partner</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#schedule" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Bankruptcy Petition Preparer · BPP</div>
+    <h1>Stop The Auction &amp;<br><em>Reclaim Your Time</em></h1>
+    <p class="hero-sub">When you're facing foreclosure, time is everything. Ylana Filing Co. prepares your bankruptcy petition to trigger an automatic stay — legally halting the auction so you can breathe and plan your next move.</p>
+    <div class="hero-buttons">
+      <a href="#schedule" class="btn-primary">Schedule a Consultation</a>
+      <a href="#how" class="btn-secondary">How It Works</a>
+    </div>
+  </div>
+  <div class="hero-badge">
+    <div class="big">BPP</div>
+    <div class="small">Certified Petition Preparer</div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="how-inner">
+    <div class="section-tag">The Process</div>
+    <h2 class="section-title">Simple Steps to<br><em>Stop the Clock</em></h2>
+    <p class="section-sub">We make the bankruptcy petition process straightforward, fast, and stress-free — so you can focus on what matters most.</p>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">01</div>
+        <h3>Reach Out</h3>
+        <p>Contact us as soon as you know about your auction date. The sooner we connect, the more options you have.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-num">02</div>
+        <h3>Free Consultation</h3>
+        <p>We review your situation, explain how the process works, and determine if a bankruptcy petition is the right move for you.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-num">03</div>
+        <h3>Petition Prepared</h3>
+        <p>We prepare your bankruptcy petition quickly and accurately, ensuring everything is in order for filing.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-num">04</div>
+        <h3>Auction Halted</h3>
+        <p>Once filed, the automatic stay goes into effect — legally stopping the auction and buying you the time you need.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY MYA -->
+<section id="why">
+  <div class="why-inner">
+    <div class="why-visual">
+      <div class="why-card-big">
+        <div class="quote">"You deserve time to make the right decision — not a rushed one forced by a deadline."</div>
+        <div class="author">— Mya Smith, BPP</div>
+      </div>
+      <div class="why-card-small">
+        <div class="stat">24hrs</div>
+        <div class="stat-label">Emergency filing available when time is critical</div>
+      </div>
+    </div>
+    <div>
+      <div class="section-tag">Why Choose Us</div>
+      <h2 class="section-title">Experienced,<br><em>Caring &amp; On Your Side</em></h2>
+      <p class="section-sub">Mya Smith is a highly experienced Bankruptcy Petition Preparer partnered with Hortier Mukonkole (HM), Licensed Realtor — together dedicated to helping homeowners navigate the most stressful moments of their lives.</p>
+      <ul class="why-list">
+        <li><span class="why-check">✓</span> Stops foreclosure auctions through the automatic stay</li>
+        <li><span class="why-check">✓</span> Fast, accurate petition preparation</li>
+        <li><span class="why-check">✓</span> Warm, personal guidance every step of the way</li>
+        <li><span class="why-check">✓</span> Partnered with Hortier Mukonkole (HM), Licensed Realtor</li>
+        <li><span class="why-check">✓</span> No judgment — just real help when you need it most</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule" id="schedule">
+  <div class="schedule-inner">
+    <div class="section-tag">Book a Consultation</div>
+    <h2 class="section-title">Let's <em>Stop the Clock</em><br>Together</h2>
+    <p class="section-sub">Fill out the form below and Mya will reach out promptly to discuss your situation and how we can help.</p>
+    <div style="margin-top: 50px; background: white; border-radius: 24px; padding: 40px; border: 1px solid rgba(201,169,110,0.2); box-shadow: 0 20px 60px rgba(201,169,110,0.12);">
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input type="text" placeholder="Your first name"></div>
+        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Your last name"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="(000) 000-0000"></div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="hortiertherealtor&#64;gmail&#46;com"></div>
+      </div>
+      <div class="form-group"><label>Auction Date (if known)</label><input type="date"></div>
+      <div class="form-group"><label>Tell Us About Your Situation</label><textarea placeholder="Briefly describe what's going on — we're here to listen and help..."></textarea></div>
+      <button class="submit-btn" onclick="alert('Thank you! Mya will be in touch with you shortly.')">Request My Consultation</button>
+    </div>
+  </div>
+</section>
+
+<!-- LEGAL REFERRAL -->
+<section class="legal-section" id="legal">
+  <div class="legal-inner">
+    <div class="section-tag">Legal Resources</div>
+    <h2 class="section-title">Need Legal Advice?<br><em>We'll Connect You</em></h2>
+    <p class="section-sub">Mya is a Bankruptcy Petition Preparer — she handles your documents and helps stop the clock. <strong>She is not an attorney and cannot give legal advice or represent you in court.</strong> But if you need someone who can, she'll connect you with a trusted attorney who specializes in exactly your situation.</p>
+
+    <div class="legal-grid">
+      <div class="legal-card">
+        <div class="legal-icon">⚖️</div>
+        <h3>Foreclosure Defense</h3>
+        <p>Attorneys who specialize in challenging foreclosure proceedings, negotiating with lenders, and legally protecting your rights as a homeowner.</p>
+      </div>
+      <div class="legal-card">
+        <div class="legal-icon">🏠</div>
+        <h3>Loan Modification</h3>
+        <p>Legal representation to restructure your mortgage terms, reduce payments, and work toward a sustainable solution with your lender.</p>
+      </div>
+      <div class="legal-card">
+        <div class="legal-icon">🤝</div>
+        <h3>Full Legal Guidance</h3>
+        <p>From court representation to short sales, referred attorneys cover every legal angle — so you're never navigating this alone.</p>
+      </div>
+    </div>
+    <div class="lawyer-cta">
+      <p class="lawyer-cta-text">Not sure if you need an attorney? Ask Mya — she'll be honest with you about what you need and connect you with the right person.</p>
+      <a href="#schedule" class="btn-primary" style="font-size:11px;padding:14px 28px;letter-spacing:1.5px;">Contact Mya for a Referral</a>
+    </div>
+  </div>
+</section>
+
+<!-- HM PARTNER SECTION -->
+<section class="hm-section" id="partner">
+  <div class="hm-inner">
+    <div class="hm-photo-wrap">
+      <img src="data:image/jpeg;base64,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" alt="Hortier Mukonkole" class="hm-photo">
+      <div class="hm-photo-badge">Licensed Realtor</div>
+    </div>
+    <div class="hm-content">
+      <div class="section-tag">Proud Partnership</div>
+      <div class="hm-name-block">
+        <h2 class="section-title">Hortier Mukonkole<br><em>"HM"</em></h2>
+      </div>
+      <div class="hm-brokerage">Lifestyle International Realty</div>
+      <p class="hm-bio">Once Mya has helped stop your auction and bought you the time you need, the next question is — what's the best path forward for your property? That's where Hortier comes in. As a licensed realtor and foreclosure advocate, HM specializes in helping homeowners in distress protect their equity, explore their options, and move forward with confidence. Together, Mya and HM offer you a complete, compassionate solution from start to finish.</p>
+      <div class="hm-contacts">
+        <a href="tel:+17542722272" class="hm-contact-btn">
+          <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+          (754) 272-2272
+        </a>
+
+        <a href="#" class="hm-contact-btn" onclick="return false;">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          Hortiertherealtor&#64;gmail&#46;com
+        </a>
+
+        <a href="https://instagram.com/Hm_Hortier" target="_blank" class="hm-contact-btn">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          @Hm_Hortier
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="testi-inner">
+    <div class="section-tag">Client Stories</div>
+    <h2 class="section-title">Real People,<br><em>Real Results</em></h2>
+    <div class="testi-grid">
+
+      <div class="testi-card featured" style="background:#1e160e;border-color:rgba(201,169,110,0.3);">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text" style="color:rgba(255,255,255,0.75);">"These people are angels on Earth. I was facing foreclosure and didn't know where to turn. Mya and HM stepped in, stopped everything, and gave me the time I needed to breathe and figure out my next move. I am forever grateful."</p>
+        <div class="testi-author" style="color:#C9A96E;">Vanessa Stickles</div>
+        <div class="testi-source" style="color:rgba(255,255,255,0.4);">Google Review · Local Guide</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"I was very guarded when I first met Hortier and his partner. My $4.3M waterfront home was close to foreclosure, and I honestly didn't think anyone could help at that point. They were patient, professional, and genuinely cared about protecting my equity. Together they bought me time and helped me sell just in time."</p>
+        <div class="testi-author">Rose Golden</div>
+        <div class="testi-source">Google Review</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"When I first connected with HM and his partner, I was overwhelmed. My high-end property was in preforeclosure and I didn't see a way out. They immediately stepped in, found a lender to pay off my debt, and guided me through every step with so much care and confidence. What could've been a nightmare turned out to be one of the smoothest experiences I've ever had."</p>
+        <div class="testi-author">Jen</div>
+        <div class="testi-source">Google Review</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"The care and empathy shown throughout this entire process was unlike anything I've experienced. They treated my situation like it was their own. I never felt judged — only supported. Highly recommend to anyone going through a difficult housing situation."</p>
+        <div class="testi-author">Stevanie Robinson</div>
+        <div class="testi-source">Google Review</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Disciplined, caring, and attentive. From the first call to the final step, they were there every time I needed them. This team truly goes above and beyond for their clients."</p>
+        <div class="testi-author">Lalo Theyknow</div>
+        <div class="testi-source">Google Review</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"I don't even have the words. God placed the right people in my path at exactly the right time. My family's home was saved because of Mya. She fought for us when we couldn't fight for ourselves. I will never forget this."</p>
+        <div class="testi-author">Steph / Decia's Daughter</div>
+        <div class="testi-source">Personal Message</div>
+      </div>
+
+      <div class="testi-card featured" style="background:#1e160e;border-color:rgba(201,169,110,0.3);">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text" style="color:rgba(255,255,255,0.75);">"I reached out not knowing what to expect, but honestly — I'm in pretty good hands. Mya explained everything clearly and made me feel like there was actually a path forward. That peace of mind alone was worth it."</p>
+        <div class="testi-author" style="color:#C9A96E;">Jeffrey C.</div>
+        <div class="testi-source" style="color:rgba(255,255,255,0.4);">Direct Message · January 2025</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PARTNER BAR -->
+<div class="partner-bar">
+  <p>Proud Partnership</p>
+  <h3>Ylana Filing Co. × Hortier Mukonkole (HM), Licensed Realtor</h3>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Ylana <span>Filing Co.</span></div>
+  <div class="footer-contact">
+    <a href="tel:3139797960">(313) 979-7960</a>
+    <span style="color:rgba(255,255,255,0.55);font-size:13px;">ylanafiling&#64;gmail&#46;com</span>
+    <div class="footer-divider"></div>
+    <div class="footer-partner-label">Partner — Hortier Mukonkole (HM)</div>
+    <a href=
